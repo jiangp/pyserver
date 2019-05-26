@@ -1,0 +1,40 @@
+syntax = "proto3"; //声明使用proto3语法
+
+package ecprotobuf;
+
+service Grpcfunc {
+  // Sends a Datafunc
+  rpc GrpcDataFunc (EcReqHeader) returns (EcResHeader) {}
+}
+
+
+//protobuf 统一使用 proto3版本
+message EcReqHeader
+{
+    uint32 cmd 		= 1; //命令号
+    uint64 seq 		= 2; //
+    uint32 userid 	= 3; //用户ID
+    uint32 platform	= 4; //平台 0:PC 1:web 4:android 6:Ios 8:Wechat 10:Mac
+    uint32 version	= 5; //版本号
+    string key 		= 6; //请求key
+    int64 len 		= 7; //请求buf包的大小 用于noticeid
+    bool compress 	= 8; //压缩字段 0：未压缩 1：压缩
+    bytes buf 		= 9; //用户请求的数据
+    int64 corpid 	= 10; //企业ID
+}
+
+message EcResHeader
+{
+    uint32 cmd 		= 1; //命令号
+    uint64 seq 		= 2;
+    uint32 userid 	= 3;
+    uint32 platform	= 4;
+    uint32 version	= 5;
+    string key 		= 6;
+    int64 len 		= 7;
+    bool compress 	= 8;
+    string origin 	= 9;
+    uint32 errcode 	= 10;  // > 10000错误码自定义线上错误内容 
+    string errinfo 	= 11;   
+    bytes buf 		= 12;
+}

@@ -1,0 +1,7 @@
+图片日志统计：
+地址： 10.0.201.230:932  /home/scribe/log/primary/wximagesvr
+接收图片数： grep '3000823395' wximagesvr-2019-03-21_00000 |grep 'Get image uid' |wc -l
+相似度去重： grep 'same image userID' wximagesvr-2019-03-21_00000 |grep '3000823395' | wc -l
+成功处理图片：grep 'End Handle' wximagesvr-2019-03-21_00000 |grep '3000823395' | wc -l
+图片地址去重：grep 'MsgRePeated' wximagesvr-2019-03-21_00000 |grep 'old message' |grep '3000823395'|wc -l
+入库聊天记录：sql: select count(0) from `d_ec_wxrecord`.`t_weixin_record_31` where `f_crm_id` = '3000823395'
